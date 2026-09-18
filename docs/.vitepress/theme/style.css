@@ -1,0 +1,135 @@
+/**
+ * 일신오토클레이브 기술자료 - 테마 커스터마이징
+ * 브랜드 컬러: ILSHIN Blue (#0b3fa8)
+ */
+
+:root {
+  --vp-c-brand-1: #0b3fa8;
+  --vp-c-brand-2: #1150c9;
+  --vp-c-brand-3: #2a6ae0;
+  --vp-c-brand-soft: rgba(11, 63, 168, 0.14);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #0b3fa8 30%, #2a9de0);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #0b3fa8 40%, #2a9de0 60%);
+  --vp-home-hero-image-filter: blur(48px);
+
+  --vp-font-family-base: 'Pretendard', -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+}
+
+.dark {
+  --vp-c-brand-1: #6fa4ff;
+  --vp-c-brand-2: #8bb6ff;
+  --vp-c-brand-3: #a8c8ff;
+  --vp-c-brand-soft: rgba(111, 164, 255, 0.16);
+}
+
+/* 헤더 로고: 다크 모드에서 반전 */
+.dark .VPNavBarTitle .logo {
+  filter: brightness(0) invert(1);
+}
+
+/* 본문 이미지 */
+.vp-doc img {
+  border-radius: 8px;
+  border: 1px solid var(--vp-c-divider);
+  background: #fff;
+}
+
+.vp-doc figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.vp-doc figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--vp-c-text-2);
+}
+
+/* 사양 표 */
+.vp-doc table {
+  display: table;
+  width: 100%;
+}
+
+.vp-doc th {
+  background: var(--vp-c-bg-soft);
+  white-space: nowrap;
+}
+
+/* 안전 표시 배지 */
+.safety-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.15em 0.6em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.safety-badge.danger {
+  background: #fdecec;
+  color: #b91c1c;
+  border: 1px solid #f3b4b4;
+}
+
+.safety-badge.warning {
+  background: #fff4e5;
+  color: #b45309;
+  border: 1px solid #f5cf9a;
+}
+
+.safety-badge.caution {
+  background: #fffbe6;
+  color: #92700e;
+  border: 1px solid #f0e0a0;
+}
+
+.dark .safety-badge.danger {
+  background: rgba(185, 28, 28, 0.2);
+  color: #fca5a5;
+  border-color: rgba(252, 165, 165, 0.35);
+}
+
+.dark .safety-badge.warning {
+  background: rgba(180, 83, 9, 0.2);
+  color: #fcd34d;
+  border-color: rgba(252, 211, 77, 0.35);
+}
+
+.dark .safety-badge.caution {
+  background: rgba(146, 112, 14, 0.2);
+  color: #fde68a;
+  border-color: rgba(253, 230, 138, 0.3);
+}
+
+/* 자가 진단 플로차트 영역 */
+.mermaid {
+  padding: 1.25rem 1rem;
+  margin: 1.5rem 0;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.mermaid svg {
+  display: block;
+  margin: 0 auto;
+  max-width: none;
+}
+
+/* 다크 모드에서 플로차트 가독성 확보 */
+.dark .mermaid {
+  background: #fff;
+}
+
+/* 단계 번호 리스트 */
+.vp-doc ol > li {
+  margin: 0.4em 0;
+}
