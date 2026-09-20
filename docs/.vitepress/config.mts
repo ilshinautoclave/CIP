@@ -22,8 +22,12 @@ export default withMermaid(
     ],
 
     themeConfig: {
-      logo: '/logo.png',
-      siteTitle: '기술자료',
+      logo: {
+        light: '/logo.png',
+        dark: '/logo-dark.png',
+        alt: '일신오토클레이브'
+      },
+      siteTitle: false,
 
       nav: [
         { text: '홈', link: '/' },
