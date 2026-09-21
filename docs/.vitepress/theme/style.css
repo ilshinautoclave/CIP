@@ -51,6 +51,16 @@
   max-height: 34px;
   width: auto;
   margin-right: 0;
+  /* 폭이 좁아지더라도 비율을 유지(찌그러짐 방지) */
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* 좌측 트리(사이드바)가 있는 페이지에서는 로고 영역 폭이
+   (사이드바 폭 - 좌우 여백 64px)로 제한됩니다.
+   로고(34px 높이 기준 236px)가 메인과 같은 크기로 들어가도록 사이드바 폭을 넓힙니다. */
+:root {
+  --vp-sidebar-width: 300px;
 }
 
 @media (max-width: 640px) {
