@@ -2,9 +2,9 @@ import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
 // ── 자료 다운로드 고객정보 수집 (download-gate/SETUP.md 참고) ──
-// Google Apps Script 웹 앱 URL. 비워두면 다운로드 버튼이 '준비 중' 안내를 띄웁니다.
+// Google Apps Script 웹 앱 URL (시트: CIP 자료 다운로드 고객 DB). 비워두면 '준비 중' 안내를 띄웁니다.
 const DOWNLOAD_GATE = {
-  endpoint: '',
+  endpoint: 'https://script.google.com/macros/s/AKfycbxmk_HDUXsomCPYAQDOUk7qIlWY-mL4nrAmU-JSkbkqD8NCsZrrC4JJ5mOEQSrmPLjV/exec',
   accent: '#0b3fa8',
   contactUrl: '/CIP/manual/appendix/support'
 }
