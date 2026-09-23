@@ -1,6 +1,14 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
+// ── 자료 다운로드 고객정보 수집 (download-gate/SETUP.md 참고) ──
+// Google Apps Script 웹 앱 URL. 비워두면 다운로드 버튼이 '준비 중' 안내를 띄웁니다.
+const DOWNLOAD_GATE = {
+  endpoint: '',
+  accent: '#0b3fa8',
+  contactUrl: '/CIP/manual/appendix/support'
+}
+
 export default withMermaid(
   defineConfig({
     // GitHub Pages: https://ilshinautoclave.github.io/CIP/
@@ -18,7 +26,9 @@ export default withMermaid(
       ['link', { rel: 'icon', href: '/CIP/favicon.ico' }],
       ['meta', { name: 'theme-color', content: '#0b3fa8' }],
       ['meta', { property: 'og:title', content: '일신오토클레이브 기술자료' }],
-      ['meta', { property: 'og:description', content: 'ISOSTATIC PRESS 매뉴얼 및 자가 진단 가이드' }]
+      ['meta', { property: 'og:description', content: 'ISOSTATIC PRESS 매뉴얼 및 자가 진단 가이드' }],
+      ['script', {}, `window.DOWNLOAD_GATE = ${JSON.stringify(DOWNLOAD_GATE)};`],
+      ['script', { src: '/CIP/download-gate.js', defer: '' }]
     ],
 
     themeConfig: {

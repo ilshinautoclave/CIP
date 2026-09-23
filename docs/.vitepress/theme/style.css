@@ -173,3 +173,34 @@
 .vp-doc ol > li {
   margin: 0.4em 0;
 }
+
+/* 다운로드 버튼 (자료실 표) — 클릭 시 고객정보 입력 폼(download-gate.js) */
+.vp-doc a.dg-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.25em 0.8em;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 6px;
+  color: var(--vp-c-brand-1);
+  font-size: 0.875em;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.vp-doc a.dg-dl::before {
+  content: '↓';
+  font-weight: 700;
+}
+
+.vp-doc a.dg-dl:hover {
+  background: var(--vp-c-brand-1);
+  color: #fff;
+}
+
+.vp-doc a.dg-dl.dg-busy {
+  opacity: 0.6;
+  cursor: progress;
+}

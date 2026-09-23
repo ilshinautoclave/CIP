@@ -46,7 +46,8 @@ docs/
 │  └─ appendix/              부록
 ├─ troubleshooting/          자가 진단 가이드 (플로차트)
 ├─ technical/                기술 문서 (알람 코드, 인터록, 부품)
-└─ download/                 다운로드
+└─ download/                 다운로드 (고객정보 입력 후 다운로드)
+download-gate/               다운로드 고객정보 수집 서버 코드 + 설정 가이드
 ```
 
 ## 페이지 추가하는 법
@@ -102,4 +103,4 @@ flowchart TD
 - `troubleshooting/heater.md` — 실제 조치 이력 반영 (A형 전용)
 - `troubleshooting/alarm-response.md` — 알람 명칭 확정
 - `manual/maintenance/checklist.md` — 점검 주기 확정
-- `download/index.md` — 실제 파일 등록
+- 다운로드 — 구글 시트 연동 설정 및 파일 등록 (`download-gate/SETUP.md` 참고)
