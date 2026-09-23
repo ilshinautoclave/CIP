@@ -3,7 +3,7 @@
 ## 공정 흐름 개요
 
 <figure>
-  <img src="/images/process-flow.jpg" alt="Process Flow Diagram" />
+  <img src="/images/process-flow_2.webp" alt="Process Flow Diagram" />
   <figcaption>[ Process Flow Diagram — 저압 Water / 고압 Water / Air 계통 ]</figcaption>
 </figure>
 
@@ -24,7 +24,7 @@
 ## P&ID 도면
 
 <figure>
-  <img src="/images/pid-diagram_2.webp" alt="P&ID" />
+  <img src="/images/pid-diagram.png" alt="P&ID" />
   <figcaption>[ P&amp;ID — Warm Isostatic Press ]</figcaption>
 </figure>
 
