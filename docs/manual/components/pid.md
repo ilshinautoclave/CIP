@@ -24,7 +24,7 @@
 ## P&ID 도면
 
 <figure>
-  <img src="/images/pid-diagram.png" alt="P&ID" />
+  <img src="/images/pid-diagram_2.webp" alt="P&ID" />
   <figcaption>[ P&amp;ID — Warm Isostatic Press ]</figcaption>
 </figure>
 

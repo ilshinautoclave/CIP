@@ -1,7 +1,7 @@
 # 6.1 메인 화면
 
 <figure>
-  <img src="/images/hmi-main.jpg" alt="W.I.P 메인 화면" />
+  <img src="/images/hmi-main_2.webp" alt="W.I.P 메인 화면" />
   <figcaption>[ 메인 화면 ]</figcaption>
 </figure>
 

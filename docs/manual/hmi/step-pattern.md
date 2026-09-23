@@ -1,7 +1,7 @@
 # 6.3 STEP 패턴 설정
 
 <figure>
-  <img src="/images/hmi-step.jpg" alt="STEP 패턴 설정 화면" />
+  <img src="/images/hmi-step_2.webp" alt="STEP 패턴 설정 화면" />
   <figcaption>[ STEP 패턴 설정 화면 ]</figcaption>
 </figure>
 

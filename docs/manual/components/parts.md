@@ -1,7 +1,7 @@
 # 4.1 주요 구성품
 
 <figure>
-  <img src="/images/equipment-internal.jpg" alt="W.I.P 내부 구성" />
+  <img src="/images/equipment-internal_2.webp" alt="W.I.P 내부 구성" />
   <figcaption>[ Warm Isostatic Press 내부 구성 ]</figcaption>
 </figure>
 

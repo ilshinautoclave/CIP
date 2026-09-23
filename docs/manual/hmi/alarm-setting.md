@@ -1,7 +1,7 @@
 # 6.2 알람 및 구동 설정 (SET)
 
 <figure>
-  <img src="/images/hmi-alarm.jpg" alt="알람 및 구동 설정 화면" />
+  <img src="/images/hmi-alarm_2.webp" alt="알람 및 구동 설정 화면" />
   <figcaption>[ 알람 및 기본 구동 설정 화면 ]</figcaption>
 </figure>
 
