@@ -4,6 +4,18 @@ ISOSTATIC PRESS 기술자료 사이트. [VitePress](https://vitepress.dev/) 기�
 
 공개 주소: https://ilshinautoclave.github.io/CIP/
 
+## 입장 코드 (구매 고객 전용)
+
+사이트에 들어오면 **접속 코드** 입력 화면이 먼저 뜹니다. 모든 고객이 같은 코드 하나를 씁니다.
+
+- 코드는 저장소에 넣지 않고 **GitHub Secret**에만 저장합니다: 저장소 **Settings → Secrets and variables → Actions → `SITE_ACCESS_CODE`**
+- **코드 변경**: 위 Secret 값을 수정한 뒤 **Actions → Deploy VitePress site to Pages → Run workflow**로 다시 배포하면 됩니다. 기존 방문자도 새 코드를 다시 입력해야 합니다.
+- 대소문자와 앞뒤 공백은 구분하지 않습니다. 8자 이상으로 정하는 것을 권장합니다.
+- Secret이 없으면 배포가 실패합니다. 로컬 미리보기(`npm run docs:dev`)에서는 입장 화면이 뜨지 않습니다.
+- 한 번 입력하면 같은 브라우저에서는 다시 묻지 않습니다.
+
+> ⚠️ 간단한 입장 제한입니다. 브라우저에서 확인하는 방식이라 개발 지식이 있으면 우회할 수 있고, 저장소가 공개 상태이면 원본 문서를 GitHub에서 볼 수 있습니다. 더 강한 보호가 필요하면 저장소 비공개 전환과 서버 측 인증을 검토하세요.
+
 ## 로컬에서 실행
 
 ```bash

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import { accessGateHead } from './access-gate'
 
 // ── 자료 다운로드 고객정보 수집 (download-gate/SETUP.md 참고) ──
 // Google Apps Script 웹 앱 URL (시트: CIP 자료 다운로드 고객 DB). 비워두면 '준비 중' 안내를 띄웁니다.
@@ -8,6 +9,13 @@ const DOWNLOAD_GATE = {
   accent: '#0b3fa8',
   contactUrl: '/CIP/manual/appendix/support'
 }
+
+// ── 사이트 입장 코드 (구매 고객 전용, access-gate.ts 참고) ──
+// 코드는 GitHub Secret `SITE_ACCESS_CODE`에만 저장합니다. 비어 있으면 입장 화면 없이 빌드됩니다.
+const ACCESS_GATE_HEAD = accessGateHead(process.env.SITE_ACCESS_CODE, {
+  base: '/CIP/',
+  contactUrl: 'https://suflux.com/'
+})
 
 export default withMermaid(
   defineConfig({
@@ -28,7 +36,8 @@ export default withMermaid(
       ['meta', { property: 'og:title', content: '일신오토클레이브 기술자료' }],
       ['meta', { property: 'og:description', content: 'ISOSTATIC PRESS 매뉴얼 및 자가 진단 가이드' }],
       ['script', {}, `window.DOWNLOAD_GATE = ${JSON.stringify(DOWNLOAD_GATE)};`],
-      ['script', { src: '/CIP/download-gate.js', defer: '' }]
+      ['script', { src: '/CIP/download-gate.js', defer: '' }],
+      ...ACCESS_GATE_HEAD
     ],
 
     themeConfig: {
