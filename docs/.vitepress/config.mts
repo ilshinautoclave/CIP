@@ -14,7 +14,7 @@ const DOWNLOAD_GATE = {
 // 코드는 GitHub Secret `SITE_ACCESS_CODE`에만 저장합니다. 비어 있으면 입장 화면 없이 빌드됩니다.
 const ACCESS_GATE_HEAD = accessGateHead(process.env.SITE_ACCESS_CODE, {
   base: '/CIP/',
-  contactUrl: 'https://suflux.com/'
+  contactUrl: 'https://suflux.com/qa/write'
 })
 
 export default withMermaid(
