@@ -35,7 +35,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check access code secret
+        env:
+          SITE_ACCESS_CODE: ${{ secrets.SITE_ACCESS_CODE }}
+        run: |
+          if [ -z "$SITE_ACCESS_CODE" ]; then
+            echo "::error::SITE_ACCESS_CODE 시크릿이 없습니다. 저장소 Settings → Secrets and variables → Actions 에서 입장 코드를 등록하세요."
+            exit 1
+          fi
+
       - name: Build
+        env:
+          SITE_ACCESS_CODE: ${{ secrets.SITE_ACCESS_CODE }}
         run: npm run docs:build
 
       - name: Upload artifact
