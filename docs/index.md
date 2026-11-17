@@ -7,7 +7,7 @@ hero:
   tagline: 초고압 기술과 정밀한 제어 시스템을 바탕으로 구축된 등방압 가압장치 솔루션입니다. 일신만의 독보적인 기술력으로 최상의 공정 환경을 제공합니다.
   image:
     src: /images/wip-render-open.webp
-    alt: 실험실용 CIP (Warm Isostatic Press)
+    alt: Pin type CIP
   actions:
     - theme: brand
       text: 매뉴얼 보기

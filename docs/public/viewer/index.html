@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>실험실용 CIP 3D 뷰어</title>
+<title>Pin type CIP 3D 뷰어</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -54,24 +54,34 @@ body {
 }
 #spec .dims { font-size: 12px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 
-#side { top: 16px; right: 16px; width: 270px; max-height: calc(100% - 110px); display: flex; flex-direction: column; overflow: hidden; }
+#side { top: 16px; right: 16px; width: 220px; max-height: calc(100% - 110px); display: flex; flex-direction: column; overflow: hidden; }
 #side h2 { margin: 0; padding: 12px 14px 8px; font-size: 13px; font-weight: 700; color: var(--ink-soft); }
 #groups { list-style: none; margin: 0; padding: 0 8px 8px; overflow-y: auto; display: grid; gap: 2px; }
 #groups label {
   display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 6px; cursor: pointer;
 }
 #groups label:hover { background: rgba(11, 92, 173, 0.06); }
-#groups input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
-#groups .n { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--ink-soft); }
+#groups input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; flex: none; }
+#groups li { display: flex; align-items: center; gap: 4px; padding-left: 8px; border-radius: 6px; }
+#groups li:hover { background: rgba(11, 92, 173, 0.06); }
+#groups .gname {
+  flex: 1; text-align: left; font: inherit; color: var(--ink); background: transparent; border: 0;
+  padding: 7px 8px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+}
+#groups .gname::after { content: ""; width: 8px; height: 8px; border-radius: 50%; margin-left: auto; background: transparent; }
+#groups .gname[aria-pressed="true"] { color: var(--accent); font-weight: 700; }
+#groups .gname[aria-pressed="true"]::after { background: #2b8cff; box-shadow: 0 0 8px #2b8cff; }
+#side .hint { margin: 0; padding: 0 14px 12px; font-size: 11.5px; color: var(--ink-soft); }
 
-#info { border-top: 1px solid var(--line); padding: 12px 14px 14px; display: grid; gap: 4px; }
-#info .k { font-size: 11px; color: var(--ink-soft); }
-#info .name { font-weight: 700; font-size: 14px; }
-#info .pn { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); word-break: break-all; }
-#info .grp { font-size: 12px; color: var(--accent); }
-#info .hint { font-size: 12px; color: var(--ink-soft); }
 
-#bar { left: 50%; bottom: 16px; transform: translateX(-50%); padding: 6px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: calc(100% - 32px); }
+#bar { left: 50%; bottom: 16px; transform: translateX(-50%); padding: 6px; display: flex; flex-direction: column; gap: 2px; max-width: calc(100% - 32px); }
+#bar .row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px; }
+#bar .row + .row { border-top: 1px solid var(--line); padding-top: 4px; }
+#bar .row-label { font-size: 12px; color: var(--ink-soft); padding: 0 6px 0 4px; }
+#bar #play { font-weight: 700; color: var(--accent); }
+#bar #play[aria-pressed="true"] { color: #fff; }
+#bar button:disabled { opacity: 0.4; cursor: default; }
+#full { color: var(--accent); font-size: 13px; padding: 8px 12px; border-radius: 6px; }
 #bar button {
   font: inherit; font-size: 13px; color: var(--ink); background: transparent; border: 0;
   padding: 8px 12px; border-radius: 6px; cursor: pointer; white-space: nowrap;
@@ -91,17 +101,13 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 
 /* embed mode (#embed): compact for manual pages — no spec card or part list, link to full viewer */
 #full { display: none; text-decoration: none; white-space: nowrap; }
-body.embed #bar { align-items: center; }
-body.embed #spec, body.embed #side h2, body.embed #groups { display: none; }
-body.embed #side { width: 230px; top: 12px; right: 12px; }
-body.embed #info { border-top: 0; }
-body.embed #full { display: inline-flex; align-items: center; }
-body.embed #bar { bottom: 10px; padding: 4px; gap: 2px; flex-wrap: nowrap; }
+body.embed #spec, body.embed #side { display: none; }
+body.embed body.embed #full { display: inline-flex; align-items: center; }
+body.embed #bar { bottom: 10px; padding: 4px; gap: 2px; }
 body.embed #bar button, body.embed #full { padding: 7px 8px; font-size: 12.5px; }
 body.embed #spin, body.embed #bar .sep { display: none; }
 body.embed #bar .mm { min-width: 0; }
 @media (max-width: 760px) {
-  body.embed #side { top: 12px; bottom: auto; left: auto; right: 12px; width: 200px; max-height: none; }
   #side { top: auto; bottom: 76px; right: 16px; left: 16px; width: auto; max-height: 34%; }
   #spec { right: 16px; max-width: none; }
   #groups { grid-template-columns: 1fr 1fr; }
@@ -116,35 +122,31 @@ body.embed #bar .mm { min-width: 0; }
 <div id="stage" aria-label="3D 모델 화면. 드래그로 회전, 휠로 확대, 우클릭 드래그로 이동"></div>
 
 <section id="spec" class="panel">
-  <div class="model">WIP26021-00A-00-000-0</div>
-  <h1>실험실용 CIP</h1>
-  <div class="chips">
-    <span class="chip">Φ70 × 200L</span>
-    <span class="chip">85 ℃</span>
-    <span class="chip">6,000 bar</span>
-  </div>
-  <div class="dims">외형 1,746 × 750 × 1,109.5 mm (L × W × H)</div>
+  <h1>Pin type CIP</h1>
 </section>
 
 <aside id="side" class="panel">
-  <h2>구성 부품</h2>
+  <h2>구성 보기</h2>
   <ul id="groups"></ul>
-  <div id="info" aria-live="polite">
-    <div class="hint">부품을 클릭하면 이름과 도면 번호가 표시됩니다.</div>
-  </div>
+  <p class="hint">이름을 누르면 해당 부분이 표시됩니다.</p>
 </aside>
 
 <nav id="bar" class="panel" aria-label="보기 설정">
-  <button data-view="iso" aria-pressed="true">투시</button>
-  <button data-view="front" aria-pressed="false">정면</button>
-  <button data-view="side" aria-pressed="false">측면</button>
-  <button data-view="back" aria-pressed="false">후면</button>
-  <button data-view="top" aria-pressed="false">상면</button>
-  <span class="sep" aria-hidden="true"></span>
-  <button id="lift" aria-pressed="false">커버 열기 <span class="mm" id="liftmm">닫힘</span></button>
-  <button id="xray" aria-pressed="false">커버 투명</button>
-  <button id="spin" aria-pressed="false">자동 회전</button>
-  <a id="full" href="./index.html" target="_blank" rel="noopener" style="font-size:13px;color:var(--accent);padding:8px 12px;border-radius:6px">전체 화면 ↗</a>
+  <div class="row">
+    <button id="play" aria-pressed="false">모션 재생</button>
+    <button id="lift" aria-pressed="false">커버 열기 <span class="mm" id="liftmm">닫힘</span></button>
+    <button id="xray" aria-pressed="false">커버 투명</button>
+    <button id="spin" aria-pressed="false">자동 회전</button>
+    <a id="full" href="./index.html" target="_blank" rel="noopener">전체 화면 ↗</a>
+  </div>
+  <div class="row">
+    <span class="row-label">뷰</span>
+    <button data-view="iso" aria-pressed="true">투시</button>
+    <button data-view="front" aria-pressed="false">정면</button>
+    <button data-view="side" aria-pressed="false">측면</button>
+    <button data-view="back" aria-pressed="false">후면</button>
+    <button data-view="top" aria-pressed="false">상면</button>
+  </div>
 </nav>
 
 <div id="loading"><div><div id="loadtxt">3D 모델 불러오는 중…</div><div class="track"><div class="fill" id="loadfill"></div></div></div></div>
@@ -171,48 +173,6 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const MODEL_URL = './model/wip26021.glb';
-
-// Friendly names for parts a manual reader is likely to click
-const LABELS = [
-  [/^WIP26021-04A-05-002/, '조작 패널 전면판'],
-  [/^WIP26021-04A-05-004/, '전면 커버'],
-  [/^WIP26021-04A-06-00/, '컨트롤러 박스'],
-  [/^P-TOPRW/, '터치 패널 (HMI)'],
-  [/^P-KGE-J4R1R/, '비상 정지 스위치'],
-  [/^P-J2M1A/, '키 스위치'],
-  [/^P-JD2B/, '푸시 버튼'],
-  [/^P-GD120F/, '캐스터'],
-  [/^WIP26021-00A-00-001/, '장비 명판'],
-  [/^WIP26021-04A-01-001/, '상판 (전면)'],
-  [/^WIP26021-04A-07-001/, '상판 (후면)'],
-  [/^WIP26021-04A-00-01[5-8]/, '측면 커버'],
-  [/^WIP26021-04A-00-019/, '후면 커버'],
-  [/^WIP26021-04A-00-001/, '베이스 프레임'],
-  [/^WIP26021-04A-09-001/, '안전핀 (Pin)'],
-  [/^WIP26021-04A-0(9|10)/, '핀 구동 브래킷'],
-  [/^MY3B40\(0\)_TABLE/, 'Air Cylinder for Pin IN/OUT · 테이블'],
-  [/^MY3B40/, 'Air Cylinder for Pin IN/OUT (핀 실린더)'],
-  [/^(MY3_D-A93|BMY3)/, 'Pin In/Out Limit Switch'],
-  [/^P-LT-101/, '케이블 그로밋'],
-  [/^P-PP-200/, '손잡이'],
-  [/^P-FST800/, '압력 센서'],
-  [/^TCDA2B40-50025/, 'Air Cylinder for Cover UP/DOWN (커버 승강 실린더)'],
-  [/^TCDA2B40-500-500Rod/, '커버 승강 실린더 로드'],
-  [/^WIP26021-05A-00-010/, '커버 승강 크로스바'],
-  [/^WIP26021-05A-00-001/, 'Pressure Vessel (Cover) · 압력용기 커버'],
-  [/^WIP26021-05A-00-011/, '커버 센터 로드'],
-  [/^WIP26021-05A-00-012/, '커버 상부 캡'],
-  [/^WIP26021-05A-00-013/, '커버 승강 실린더 브래킷'],
-  [/^40Auto Switch/, 'Cover Up/Down 감지 센서'],
-  [/^WIP26021-01A-00-001/, 'Pressure Vessel (Body) · 압력용기 본체'],
-  [/^HP /, '고압 부품'],
-  [/^P-(SHCS|HHB|BHCS|FHCS)/, '볼트'],
-  [/^P-(PW|SW)-/, '와셔'],
-  [/^P-HN-/, '너트'],
-  [/^명판_/, '배관 명판'],
-];
-const cleanName = (s) => s.replace(/#\d+$/, '').replace(/#?_?표준.*$/, '').replace(/#$/, '').replace(/_KS .*$/, '').replace(/_JIS .*$/, '');
-const labelFor = (pn) => { for (const [re, l] of LABELS) if (re.test(pn)) return l; return null; };
 
 // ---------- renderer / scene ----------
 const stage = document.getElementById('stage');
@@ -255,7 +215,6 @@ scene.add(ground);
 const draco = new DRACOLoader().setDecoderPath('./lib/draco/');
 const loader = new GLTFLoader().setDRACOLoader(draco);
 const fill = document.getElementById('loadfill');
-const pickables = [];
 const groups = new Map();      // group name -> [Object3D]
 let center = new THREE.Vector3(), radius = 1;
 const coverMats = new Set();
@@ -294,11 +253,10 @@ loadModelBuffer().then((buf) => loader.parseAsync(buf, './model/')).then((gltf) 
   root.traverse((o) => {
     if (o.isMesh) {
       o.castShadow = true; o.receiveShadow = true;
-      pickables.push(o);
       const m = o.material;
       if (m && m.name === '도장_라이트그레이') coverMats.add(m);
     }
-    if (o.userData && o.userData.group && o.userData.part) {
+    if (o.userData && o.userData.group) {
       if (!groups.has(o.userData.group)) groups.set(o.userData.group, []);
       groups.get(o.userData.group).push(o);
     }
@@ -315,31 +273,59 @@ loadModelBuffer().then((buf) => loader.parseAsync(buf, './model/')).then((gltf) 
   const h = location.hash.replace('#', '').split('-');      // e.g. #xray-side, #open
   setView(h.find((x) => VIEWS[x]) || 'iso', false);
   if (h.includes('xray')) document.getElementById('xray').click();
-  if (h.includes('open')) document.getElementById('lift').click();
+  if (h.includes('open')) setOpen(true);
+  if (h.includes('play')) startMotion();
   document.getElementById('loading').remove();
 }).catch(() => {
   document.getElementById('loadtxt').textContent = '모델 파일을 불러오지 못했습니다. model 폴더의 파일 경로를 확인해 주세요.';
 });
 
 // ---------- group list ----------
-const GROUP_LABEL = {
-  '리프트 시스템 (05A)': '커버 승강부 (05A)',
-  '미니 인텐시파이어 펌프': 'High Pressure Pump',
-  '리저버 탱크 (03A)': 'Water Tank (03A)',
-};
+const SHOWN_GROUPS = ['베셀 조립체', '커버 승강부', 'High Pressure Pump', 'Water Tank'];
 function buildGroupList() {
-  const order = ['메인 프레임 (04A)', '베셀 조립체 (01A)', '리프트 시스템 (05A)', '미니 인텐시파이어 펌프', '리저버 탱크 (03A)', '고압 배관 (98A)', '체결 부품·기타'];
   const ul = document.getElementById('groups');
-  [...groups.keys()].sort((a, b) => order.indexOf(a) - order.indexOf(b)).forEach((g, i) => {
+  SHOWN_GROUPS.filter((g) => groups.has(g)).forEach((g, i) => {
     const li = document.createElement('li');
-    li.innerHTML = `<label for="g${i}"><input type="checkbox" id="g${i}" checked><span></span><span class="n"></span></label>`;
-    li.querySelector('span').textContent = GROUP_LABEL[g] || g;
-    li.querySelector('.n').textContent = groups.get(g).length;
+    li.innerHTML = `<input type="checkbox" id="g${i}" checked aria-label="보이기"><button type="button" class="gname" aria-pressed="false"></button>`;
+    const btn = li.querySelector('.gname');
+    btn.textContent = g;
     li.querySelector('input').addEventListener('change', (ev) => {
       groups.get(g).forEach((o) => { o.visible = ev.target.checked; });
     });
+    btn.addEventListener('click', () => highlightGroup(highlighted === g ? null : g));
     ul.appendChild(li);
   });
+}
+
+// ---------- highlight (glow) ----------
+let highlighted = null, autoXray = false;
+const glowMats = new Map();   // original material -> glowing clone
+const glowing = [];           // [mesh, originalMaterial]
+function highlightGroup(g) {
+  glowing.forEach(([m, orig]) => { m.material = orig; });
+  glowing.length = 0;
+  highlighted = g;
+  document.querySelectorAll('#groups .gname').forEach((b) => b.setAttribute('aria-pressed', String(b.textContent === g)));
+  if (g) {
+    const cb = [...document.querySelectorAll('#groups li')].find((li) => li.querySelector('.gname').textContent === g).querySelector('input');
+    if (!cb.checked) { cb.checked = true; groups.get(g).forEach((o) => { o.visible = true; }); }
+    groups.get(g).forEach((node) => node.traverse((m) => {
+      if (!m.isMesh) return;
+      let gm = glowMats.get(m.material);
+      if (!gm) {
+        gm = m.material.clone();
+        gm.emissive = new THREE.Color(0x2b8cff);
+        gm.transparent = false; gm.opacity = 1; gm.depthWrite = true;
+        glowMats.set(m.material, gm);
+      }
+      glowing.push([m, m.material]); m.material = gm;
+    }));
+    if (!xrayOn) { setXray(true); autoXray = true; }   // internals sit behind the covers
+  } else if (autoXray) { setXray(false); autoXray = false; }
+}
+function pulseGlow(t) {
+  const k = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0.6 : 0.45 + 0.35 * Math.sin(t * 3.2);
+  glowMats.forEach((m) => { m.emissiveIntensity = k; });
 }
 
 // ---------- open / close sequence ----------
@@ -349,8 +335,6 @@ function buildGroupList() {
 // Close: ② Cover DOWN first, then ① Pin IN.
 const SLIDE_STROKE = 0.3, LIFT_STROKE = 0.5;               // m
 const SLIDE_SEC = 2.0, LIFT_SEC = 3.0;
-const FIXED_LIFT_PARTS = /^(TCDA2B40-50025|40Auto Switch|WIP26021-05A-00-013)/;
-const SLIDE_PARTS = /^(WIP26021-04A-09-00[12]|WIP26021-04A-10-|MY3B40\(0\)_TABLE|P-JAF40|P-HHB-SNCM-M14|P-(PW|SW)-SNCM-M(14|8)|P-SHCS-SNCM-M8X110|P-SHCS-SUS-M6X12)/;
 const liftMovers = [], slideMovers = [];
 const seq = { slide: 0, lift: 0, open: false };
 function mover(n, worldDelta) {
@@ -358,13 +342,10 @@ function mover(n, worldDelta) {
   return { n, p0: n.position.clone(), p1: n.parent.worldToLocal(w0.add(worldDelta)) };
 }
 function setupLift(root) {
-  (groups.get('리프트 시스템 (05A)') || []).forEach((n) => {
-    if (!FIXED_LIFT_PARTS.test(n.userData.part)) liftMovers.push(mover(n, new THREE.Vector3(0, LIFT_STROKE, 0)));
-  });
-  const unit = root.getObjectByName('NAUO370');                // slide unit sub-assembly
-  if (unit) unit.traverse((n) => {
-    if (n !== unit && n.userData && n.userData.part && SLIDE_PARTS.test(n.userData.part))
-      slideMovers.push(mover(n, new THREE.Vector3(0, 0, -SLIDE_STROKE)));   // toward the rear
+  root.traverse((n) => {
+    const m = n.userData && n.userData.move;
+    if (m === 'lift') liftMovers.push(mover(n, new THREE.Vector3(0, LIFT_STROKE, 0)));
+    else if (m === 'slide') slideMovers.push(mover(n, new THREE.Vector3(0, 0, -SLIDE_STROKE)));   // toward the rear
   });
 }
 const ease = (k) => k * k * (3 - 2 * k);
@@ -390,12 +371,39 @@ function stepSeq(dt) {
   }
   if (seq.slide + seq.lift !== before) applySeq();
 }
-document.getElementById('lift').addEventListener('click', (e) => {
-  const b = e.currentTarget;
-  seq.open = !seq.open;
-  b.setAttribute('aria-pressed', String(seq.open));
-  b.firstChild.textContent = seq.open ? '커버 닫기 ' : '커버 열기 ';
-});
+function setOpen(open) {
+  seq.open = open;
+  const b = document.getElementById('lift');
+  b.setAttribute('aria-pressed', String(open));
+  b.firstChild.textContent = open ? '커버 닫기 ' : '커버 열기 ';
+}
+document.getElementById('lift').addEventListener('click', () => setOpen(!seq.open));
+
+// ---------- motion playback: ① cover transparent → ② cover open → ③ cover close ----------
+const motion = { phase: null, t: 0, xrayBefore: false };
+const playBtn = document.getElementById('play');
+function startMotion() {
+  motion.xrayBefore = xrayOn; motion.phase = 'xray'; motion.t = 0;
+  autoXray = false; setXray(true);
+  playBtn.setAttribute('aria-pressed', 'true'); playBtn.textContent = '정지';
+  document.getElementById('lift').disabled = true;
+}
+function stopMotion(finished) {
+  motion.phase = null;
+  playBtn.setAttribute('aria-pressed', 'false'); playBtn.textContent = '모션 재생';
+  document.getElementById('lift').disabled = false;
+  if (finished && !motion.xrayBefore) setXray(false);
+}
+playBtn.addEventListener('click', () => (motion.phase ? stopMotion(false) : startMotion()));
+function stepMotion(dt) {
+  if (!motion.phase) return;
+  motion.t += dt;
+  if (motion.phase === 'xray' && motion.t > 1.0) { setOpen(true); motion.phase = 'open'; motion.t = 0; }
+  else if (motion.phase === 'open' && seq.slide === 1 && seq.lift === 1) { motion.phase = 'hold'; motion.t = 0; }
+  else if (motion.phase === 'hold' && motion.t > 1.5) { setOpen(false); motion.phase = 'close'; motion.t = 0; }
+  else if (motion.phase === 'close' && seq.slide === 0 && seq.lift === 0) { motion.phase = 'end'; motion.t = 0; }
+  else if (motion.phase === 'end' && motion.t > 0.8) stopMotion(true);
+}
 
 // ---------- views ----------
 const VIEWS = {
@@ -423,59 +431,13 @@ document.getElementById('spin').addEventListener('click', (e) => {
   controls.autoRotate = !controls.autoRotate;
   e.currentTarget.setAttribute('aria-pressed', String(controls.autoRotate));
 });
-document.getElementById('xray').addEventListener('click', (e) => {
-  const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
-  e.currentTarget.setAttribute('aria-pressed', String(on));
+let xrayOn = false;
+function setXray(on) {
+  xrayOn = on;
+  document.getElementById('xray').setAttribute('aria-pressed', String(on));
   coverMats.forEach((m) => { m.transparent = on; m.opacity = on ? 0.14 : 1; m.depthWrite = !on; m.needsUpdate = true; });
-});
-
-// ---------- picking ----------
-const ray = new THREE.Raycaster();
-const ptr = new THREE.Vector2();
-let selected = null, downAt = null;
-const hiMats = new Map();
-function partOf(o) { while (o && !(o.userData && o.userData.part)) o = o.parent; return o; }
-function meshesOf(node) { const a = []; node.traverse((m) => { if (m.isMesh) a.push(m); }); return a; }
-function highlight(node, on) {
-  meshesOf(node).forEach((m) => {
-    if (on) {
-      m.userData._mat = m.material;
-      let h = hiMats.get(m.material);
-      if (!h) { h = m.material.clone(); h.emissive = new THREE.Color(0x0b5cad); h.emissiveIntensity = 0.55; hiMats.set(m.material, h); }
-      m.material = h;
-    } else if (m.userData._mat) { m.material = m.userData._mat; delete m.userData._mat; }
-  });
 }
-function pick(ev) {
-  const r = renderer.domElement.getBoundingClientRect();
-  ptr.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
-  ray.setFromCamera(ptr, camera);
-  const hits = ray.intersectObjects(pickables, false).filter((h) => {
-    let o = h.object; while (o) { if (!o.visible) return false; o = o.parent; }
-    const m = h.object.userData._mat || h.object.material;
-    return !(m.transparent && m.opacity < 0.5);
-  });
-  return hits.length ? partOf(hits[0].object) : null;
-}
-renderer.domElement.addEventListener('pointerdown', (e) => { downAt = [e.clientX, e.clientY]; });
-renderer.domElement.addEventListener('pointerup', (e) => {
-  if (!downAt || Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 4) return;
-  const node = pick(e);
-  if (selected) highlight(selected, false);
-  selected = node && node !== selected ? node : null;
-  if (selected) highlight(selected, true);
-  showInfo(selected);
-});
-function showInfo(node) {
-  const box = document.getElementById('info');
-  if (!node) { box.innerHTML = '<div class="hint">부품을 클릭하면 이름과 도면 번호가 표시됩니다.</div>'; return; }
-  const pn = cleanName(node.userData.part);
-  const label = labelFor(node.userData.part);
-  box.innerHTML = '<div class="k">선택한 부품</div><div class="name"></div><div class="pn"></div><div class="grp"></div>';
-  box.querySelector('.name').textContent = label || pn;
-  box.querySelector('.pn').textContent = label ? pn : '';
-  box.querySelector('.grp').textContent = GROUP_LABEL[node.userData.group] || node.userData.group;
-}
+document.getElementById('xray').addEventListener('click', () => { autoXray = false; setXray(!xrayOn); });
 
 // ---------- loop ----------
 function resize() {
@@ -493,7 +455,9 @@ renderer.setAnimationLoop(() => {
     controls.target.lerpVectors(anim.t0, anim.t1, k);
     if (anim.t >= 1) anim = null;
   }
+  stepMotion(dt);
   stepSeq(dt);
+  if (glowing.length) pulseGlow(clock.elapsedTime);
   controls.update();
   renderer.render(scene, camera);
 });
