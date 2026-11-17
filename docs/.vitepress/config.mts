@@ -96,7 +96,8 @@ export default withMermaid(
             items: [
               { text: '4.1 주요 구성품', link: '/manual/components/parts' },
               { text: '4.2 공정 흐름도 (P&ID)', link: '/manual/components/pid' },
-              { text: '4.3 제어반 구성', link: '/manual/components/control-panel' }
+              { text: '4.3 제어반 구성', link: '/manual/components/control-panel' },
+              { text: '4.4 3D 모델 보기', link: '/manual/components/3d-viewer' }
             ]
           },
           {

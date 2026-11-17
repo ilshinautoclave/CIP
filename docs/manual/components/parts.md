@@ -5,6 +5,12 @@
   <figcaption>[ Warm Isostatic Press 내부 구성 ]</figcaption>
 </figure>
 
+### 3D로 살펴보기
+
+드래그로 돌려 보고, 부품을 클릭하면 명칭이 표시됩니다. 내부가 보이도록 외장 커버를 투명하게 해 두었습니다. ([전체 화면으로 보기](/manual/components/3d-viewer))
+
+<iframe src="/CIP/viewer/index.html#embed-xray" title="W.I.P 3D 구성" style="width:100%;height:560px;border:0;border-radius:12px;background:#e9ecef" allowfullscreen loading="lazy"></iframe>
+
 ## 구성품 일람
 
 | 구분 | 명칭 | 기능 |

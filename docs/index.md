@@ -6,8 +6,8 @@ hero:
   text: ISOSTATIC PRESS 기술자료
   tagline: 초고압 기술과 정밀한 제어 시스템을 바탕으로 구축된 등방압 가압장치 솔루션입니다. 일신만의 독보적인 기술력으로 최상의 공정 환경을 제공합니다.
   image:
-    src: /images/wip-unit.webp
-    alt: W.I.P PROCESS CONTROLLER
+    src: /images/wip-render-open.webp
+    alt: 실험실용 CIP (Warm Isostatic Press)
   actions:
     - theme: brand
       text: 매뉴얼 보기
@@ -18,6 +18,9 @@ hero:
     - theme: alt
       text: 다운로드
       link: /download/
+    - theme: alt
+      text: 3D로 보기
+      link: /manual/components/3d-viewer
 
 features:
   - icon: 🏭
@@ -45,6 +48,7 @@ features:
 | HMI 화면 버튼의 의미를 알고 싶다 | [매뉴얼 › HMI 화면](/manual/hmi/main-screen) |
 | 장비에 이상이 생겼다 | [자가 진단 가이드](/troubleshooting/) |
 | 알람이 떴다 | [기술 문서 › 알람 코드표](/technical/alarm-code-table) |
+| 장비 구조를 3D로 보고 싶다 | [매뉴얼 › 3D 모델 보기](/manual/components/3d-viewer) |
 | 도면·부품표가 필요하다 | [다운로드](/download/) |
 
 ::: danger 안전 경고

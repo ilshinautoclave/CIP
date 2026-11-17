@@ -53,4 +53,10 @@
 램프가 점등되지 않으면 [자가 진단 › 승압/유지 불량](/troubleshooting/pressure-build)을 참조하십시오.
 :::
 
+## 3D로 동작 확인하기
+
+**커버 열기**를 누르면 핀 인출(Pin OUT) → 커버 상승(Cover UP) 순서로, **커버 닫기**를 누르면 커버 하강(Cover DOWN) → 핀 삽입(Pin IN) 순서로 움직입니다. 핀은 외장 커버 안쪽에 있으므로 **커버 투명**을 켜면 핀이 빠지고 들어가는 모습을 볼 수 있습니다.
+
+<iframe src="/CIP/viewer/index.html#embed-xray-side" title="커버·핀 동작" style="width:100%;height:560px;border:0;border-radius:12px;background:#e9ecef" allowfullscreen loading="lazy"></iframe>
+
 다음 단계 → [5.5 가압](./pressurizing)
