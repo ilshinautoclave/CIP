@@ -204,3 +204,9 @@
   opacity: 0.6;
   cursor: progress;
 }
+
+/* Home hero: show the product render larger on wide screens (VitePress caps it at 320px) */
+@media (min-width: 960px) {
+  .VPHero .image-container { width: 480px; height: 480px; }
+  .VPHero .image-src { max-width: 500px; max-height: 500px; }
+}
